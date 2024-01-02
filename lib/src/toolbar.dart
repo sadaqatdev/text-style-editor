@@ -30,14 +30,14 @@ class _ToolbarState extends State<Toolbar> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        OptionButton(
-          isActive: _selectedAction == EditorToolbarAction.editor,
-          child: Icon(Icons.keyboard),
-          onPressed: () {
-            setState(() => _selectedAction = EditorToolbarAction.editor);
-            widget.onToolSelect(EditorToolbarAction.editor);
-          },
-        ),
+        // OptionButton(
+        //   isActive: _selectedAction == EditorToolbarAction.editor,
+        //   child: Icon(Icons.keyboard),
+        //   onPressed: () {
+        //     setState(() => _selectedAction = EditorToolbarAction.editor);
+        //     widget.onToolSelect(EditorToolbarAction.editor);
+        //   },
+        // ),
         OptionButton(
           isActive: _selectedAction == EditorToolbarAction.fontFamilyTool,
           child: Icon(Icons.title),

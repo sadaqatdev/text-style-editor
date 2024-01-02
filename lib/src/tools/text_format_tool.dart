@@ -26,25 +26,12 @@ class TextFormatTool extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 36),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _TextFormatEditor(
-            bold: bold,
-            italic: italic,
-            caps: caps,
-            onFormatEdited: onTextFormatEdited,
-            onCpasLockTaggle: onCpasLockTaggle,
-          ),
-          SizedBox(height: 36),
-          _TextAlignEditor(
-            textAlign: textAlign,
-            onTextAlignEdited: onTextAlignEdited,
-          ),
-        ],
-      ),
+    return _TextFormatEditor(
+      bold: bold,
+      italic: italic,
+      caps: caps,
+      onFormatEdited: onTextFormatEdited,
+      onCpasLockTaggle: onCpasLockTaggle,
     );
   }
 }
@@ -158,6 +145,8 @@ class _TextFormatEditor extends StatefulWidget {
 }
 
 class _TextFormatEditorState extends State<_TextFormatEditor> {
+  //
+
   late bool _bold;
   late bool _italic;
   late bool _caps;
@@ -174,34 +163,43 @@ class _TextFormatEditorState extends State<_TextFormatEditor> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _TextFormatOption(
-          title: 'BOLD',
-          icon: Icons.format_bold,
-          isActive: _bold,
-          onPressed: () {
-            setState(() => _bold = !_bold);
-            widget.onFormatEdited(_bold, _italic);
-          },
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: _TextFormatOption(
+            title: 'BOLD',
+            icon: Icons.format_bold,
+            isActive: _bold,
+            onPressed: () {
+              setState(() => _bold = !_bold);
+              widget.onFormatEdited(_bold, _italic);
+            },
+          ),
         ),
-        _TextFormatOption(
-          title: 'ITALIC',
-          icon: Icons.format_italic,
-          isActive: _italic,
-          onPressed: () {
-            setState(() => _italic = !_italic);
-            widget.onFormatEdited(_bold, _italic);
-          },
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: _TextFormatOption(
+            title: 'ITALIC',
+            icon: Icons.format_italic,
+            isActive: _italic,
+            onPressed: () {
+              setState(() => _italic = !_italic);
+              widget.onFormatEdited(_bold, _italic);
+            },
+          ),
         ),
-        _TextFormatOption(
-          title: 'CAPS',
-          icon: Icons.keyboard_capslock,
-          isActive: _caps,
-          onPressed: () {
-            setState(() => _caps = !_caps);
-            widget.onCpasLockTaggle(_caps);
-          },
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: _TextFormatOption(
+            title: 'CAPS',
+            icon: Icons.keyboard_capslock,
+            isActive: _caps,
+            onPressed: () {
+              setState(() => _caps = !_caps);
+              widget.onCpasLockTaggle(_caps);
+            },
+          ),
         ),
       ],
     );
@@ -222,16 +220,10 @@ class _TextFormatOption extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        OptionButton(
-          isActive: isActive,
-          onPressed: onPressed,
-          child: Icon(icon),
-        ),
-        SizedBox(height: 12),
-        Text(title),
-      ],
+    return OptionButton(
+      isActive: isActive,
+      onPressed: onPressed,
+      child: Icon(icon),
     );
   }
 }

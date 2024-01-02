@@ -115,6 +115,9 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
         Divider(),
         Expanded(
           child: SingleChildScrollView(
+            scrollDirection: _currentTool == EditorToolbarAction.fontSizeTool
+                ? Axis.vertical
+                : Axis.horizontal,
             child: () {
               // Choice tools
               switch (_currentTool) {

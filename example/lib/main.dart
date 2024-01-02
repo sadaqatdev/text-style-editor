@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -67,8 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Color(int.parse('0xff1289A7')),
     Color(int.parse('0xffD980FA'))
   ];
-  TextStyle textStyle;
-  TextAlign textAlign;
+  late TextStyle textStyle;
+  late TextAlign textAlign;
 
   @override
   void initState() {
@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SafeArea(
               bottom: false,
               child: Container(
-                height: 300,
+                height: 400,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   border: Border.symmetric(
