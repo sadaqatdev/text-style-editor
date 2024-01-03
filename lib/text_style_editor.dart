@@ -166,7 +166,7 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                   );
                 case EditorToolbarAction.fontSizeTool:
                   return FontSizeTool(
-                    fontSize: _textStyle.fontSize ?? 0,
+                    fontSize: _textStyle.fontSize ?? 12,
                     letterHeight: _textStyle.height ?? 1.2,
                     letterSpacing: _textStyle.letterSpacing ?? 1,
                     onFontSizeEdited: (
