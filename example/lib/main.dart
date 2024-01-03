@@ -1,6 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:text_style_editor/text_style_editor.dart';
 
+class AppColors {
+  static Color backgroundBlack = const Color(0xff101E21);
+  static Color cardBlack = const Color(0xff203238);
+  static Color white = const Color(0xffFFFFFF);
+  static Color iconColor = const Color(0xffCBCBCB);
+  static Color buttonColor = const Color(0xff8C32D3);
+  static Color iconColors = const Color(0xff25A792);
+  static Color seeAllblack = const Color(0xff212227);
+
+  static var borderColor = Color(0xff969696);
+
+  static var offWhite = Color(0xffDEDEDE);
+  static var dividerColor = Color(0xff8B8B8B);
+}
+
+var theme = ThemeData(
+  highlightColor: Colors.transparent,
+  splashColor: Colors.transparent,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: AppColors.backgroundBlack,
+    primary: AppColors.cardBlack,
+    background: AppColors.backgroundBlack,
+    secondary: AppColors.cardBlack,
+    onBackground: AppColors.buttonColor,
+  ),
+  iconTheme: IconThemeData(color: AppColors.white),
+  useMaterial3: true,
+  scaffoldBackgroundColor: AppColors.backgroundBlack,
+  textTheme: TextThemes.textTheme,
+);
+
 void main() {
   runApp(MyApp());
 }
@@ -11,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TextStyleEditor Demo',
-      theme: ThemeData.light(),
+      theme: theme,
       // theme: ThemeData.dark(),
       home: MyHomePage(title: 'TextStyleEditor Demo'),
     );
@@ -120,7 +151,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     textStyle: textStyle,
                     textAlign: textAlign,
                     initialTool: EditorToolbarAction.fontFamilyTool,
-                    
                     onTextAlignEdited: (align) {
                       setState(() {
                         textAlign = align;
@@ -143,4 +173,110 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+class TextThemes {
+  /// Main text theme
+
+  static TextTheme get textTheme {
+    return const TextTheme(
+      bodyLarge: AppTextStyles.bodyLg,
+      bodyMedium: AppTextStyles.body,
+      titleMedium: AppTextStyles.bodySm,
+      titleSmall: AppTextStyles.bodyXs,
+      displayLarge: AppTextStyles.h1,
+      displayMedium: AppTextStyles.h2,
+      displaySmall: AppTextStyles.h3,
+      headlineMedium: AppTextStyles.h4,
+    ).apply(
+      bodyColor: AppColors.white,
+      decorationColor: AppColors.white,
+      displayColor: AppColors.white,
+    );
+  }
+
+  /// Dark text theme
+
+  static TextTheme get darkTextTheme {
+    return TextTheme(
+      bodyLarge: AppTextStyles.bodyLg.copyWith(color: AppColors.white),
+      bodyMedium: AppTextStyles.body.copyWith(color: AppColors.white),
+      titleMedium: AppTextStyles.bodySm.copyWith(color: AppColors.white),
+      titleSmall: AppTextStyles.bodyXs.copyWith(color: AppColors.white),
+      displayLarge: AppTextStyles.h1.copyWith(color: AppColors.white),
+      displayMedium: AppTextStyles.h2.copyWith(color: AppColors.white),
+      displaySmall: AppTextStyles.h3.copyWith(color: AppColors.white),
+      headlineMedium: AppTextStyles.h4.copyWith(color: AppColors.white),
+    );
+  }
+
+  /// Primary text theme
+
+  // static TextTheme get primaryTextTheme {
+  //   return TextTheme(
+  //     bodyLarge: AppTextStyles.bodyLg.copyWith(color: AppColors.primary),
+  //     bodyMedium: AppTextStyles.body.copyWith(color: AppColors.primary),
+  //     titleMedium: AppTextStyles.bodySm.copyWith(color: AppColors.primary),
+  //     titleSmall: AppTextStyles.bodyXs.copyWith(color: AppColors.primary),
+  //     displayLarge: AppTextStyles.h1.copyWith(color: AppColors.primary),
+  //     displayMedium: AppTextStyles.h2.copyWith(color: AppColors.primary),
+  //     displaySmall: AppTextStyles.h3.copyWith(color: AppColors.primary),
+  //     headlineMedium: AppTextStyles.h4.copyWith(color: AppColors.primary),
+  //   );
+  // }
+}
+
+class AppTextStyles {
+  static const String fontFamily = 'Poppins';
+
+  /// Text style for body
+  static const TextStyle bodyLg = TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      fontFamily: fontFamily,
+      overflow: TextOverflow.ellipsis);
+
+  static const TextStyle body = TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      fontFamily: fontFamily,
+      overflow: TextOverflow.ellipsis);
+
+  static const TextStyle bodySm = TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w300,
+      fontFamily: fontFamily,
+      overflow: TextOverflow.ellipsis);
+
+  static const TextStyle bodyXs = TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w300,
+      fontFamily: fontFamily,
+      overflow: TextOverflow.ellipsis);
+
+  /// Text style for heading
+
+  static const TextStyle h1 = TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w700,
+      fontFamily: fontFamily,
+      overflow: TextOverflow.ellipsis);
+
+  static const TextStyle h2 = TextStyle(
+      fontSize: 22,
+      fontWeight: FontWeight.w700,
+      fontFamily: fontFamily,
+      overflow: TextOverflow.ellipsis);
+
+  static const TextStyle h3 = TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      fontFamily: fontFamily,
+      overflow: TextOverflow.ellipsis);
+
+  static const TextStyle h4 = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      fontFamily: fontFamily,
+      overflow: TextOverflow.ellipsis);
 }
