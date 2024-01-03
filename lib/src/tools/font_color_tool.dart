@@ -4,7 +4,7 @@ import 'package:text_style_editor/src/color_palette.dart';
 class FontColorTool extends StatelessWidget {
   final List<Color> colors;
   final Color? activeColor;
-  final Function(Color) onColorPicked;
+  final Function(Color?) onColorPicked;
 
   FontColorTool({
     required this.colors,
@@ -18,6 +18,7 @@ class FontColorTool extends StatelessWidget {
       activeColor: activeColor,
       onColorPicked: onColorPicked,
       colors: colors,
+      editorToolbarAction: null,
     );
   }
 }

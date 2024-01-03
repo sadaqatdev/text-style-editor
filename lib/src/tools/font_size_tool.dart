@@ -12,7 +12,7 @@ class FontSizeTool extends StatelessWidget {
 
   FontSizeTool({
     required this.onFontSizeEdited,
-    this.fontSize = 0,
+    this.fontSize = 12,
     this.letterSpacing = 0,
     this.letterHeight = 0,
   });
@@ -174,7 +174,7 @@ class _ResizeBtnState extends State<_ResizeBtn> {
         InkWell(
             onTap: () {
               var v = _value - 1;
-              if (v >= 8) {
+              if (v >= 1) {
                 widget.onChange(v);
                 _value = v;
                 setState(() {});
