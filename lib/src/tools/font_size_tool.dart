@@ -25,9 +25,9 @@ class FontSizeTool extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.all(16),
-      child: Column(
+      child: Row(
         children: [
-          _ResizeSlider(
+          _ResizeBtn(
             value: _fontSize,
             icon: Icons.format_size,
             onChange: (value) {
@@ -35,16 +35,18 @@ class FontSizeTool extends StatelessWidget {
               onFontSizeEdited(_fontSize, _letterSpacing, _letterHeight);
             },
           ),
-          _ResizeSlider(
-            value: _letterHeight,
-            icon: Icons.format_line_spacing,
-            max: 10,
-            onChange: (value) {
-              _letterHeight = value;
-              onFontSizeEdited(_fontSize, _letterSpacing, _letterHeight);
-            },
-          ),
-          _ResizeSlider(
+          Spacer(),
+          // _ResizeBtn(
+          //   value: _letterHeight,
+          //   icon: Icons.format_line_spacing,
+          //   max: 10,
+          //   onChange: (value) {
+          //     _letterHeight = value;
+          //     onFontSizeEdited(_fontSize, _letterSpacing, _letterHeight);
+          //   },
+          // ),
+
+          _ResizeBtn(
             value: _letterSpacing,
             icon: Icons.settings_ethernet,
             max: 10,
@@ -116,6 +118,69 @@ class _ResizeSliderState extends State<_ResizeSlider> {
           ),
         ),
         Text(_value.toStringAsFixed(1)),
+      ],
+    );
+  }
+}
+
+class _ResizeBtn extends StatefulWidget {
+  final double value;
+  final double? min;
+  final double? max;
+  final IconData icon;
+  final Function(double) onChange;
+
+  _ResizeBtn({
+    required this.value,
+    required this.icon,
+    required this.onChange,
+    this.min = 0,
+    this.max = 100,
+  });
+
+  @override
+  _ResizeBtnState createState() => _ResizeBtnState();
+}
+
+class _ResizeBtnState extends State<_ResizeBtn> {
+  late double _value;
+
+  @override
+  void initState() {
+    _value = widget.value;
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(widget.icon),
+        SizedBox(width: 14),
+        InkWell(
+            onTap: () {
+              var v = _value + 1;
+              if (v <= 30) {
+                widget.onChange(v);
+                _value = v;
+                setState(() {});
+              }
+            },
+            child: Icon(Icons.add)),
+        SizedBox(width: 14),
+        Text(_value.toStringAsFixed(1)),
+        SizedBox(width: 14),
+        InkWell(
+            onTap: () {
+              var v = _value - 1;
+              if (v >= 8) {
+                widget.onChange(v);
+                _value = v;
+                setState(() {});
+              }
+            },
+            child: Icon(Icons.remove))
       ],
     );
   }

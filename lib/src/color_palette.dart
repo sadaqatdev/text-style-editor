@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:text_style_editor/text_style_editor.dart';
 
 class ColorPalette extends StatefulWidget {
   final Color? activeColor;
   final List<Color> colors;
-  final Function(Color) onColorPicked;
-
-  ColorPalette({
-    this.activeColor,
-    required this.onColorPicked,
-    required this.colors,
-  });
+  final Function(Color?) onColorPicked;
+  final EditorToolbarAction? editorToolbarAction;
+  ColorPalette(
+      {this.activeColor,
+      required this.onColorPicked,
+      required this.colors,
+      required this.editorToolbarAction});
 
   @override
   _ColorPaletteState createState() => _ColorPaletteState();
@@ -32,18 +33,42 @@ class _ColorPaletteState extends State<ColorPalette> {
       child: Wrap(
         spacing: 16,
         runSpacing: 16,
-        children: widget.colors
-            .map(
-              (color) => _ColorHolder(
-                color: color,
-                active: color == _activeColor,
-                onTap: (color) {
-                  setState(() => _activeColor = color);
-                  widget.onColorPicked(color);
-                },
-              ),
-            )
-            .toList(),
+        children: [
+          widget.editorToolbarAction == EditorToolbarAction.backgroundColorTool
+              ? InkWell(
+                  onTap: () {
+                    widget.onColorPicked(null);
+                  },
+                  child: Container(
+                    height: 39,
+                    width: 39,
+                    decoration: BoxDecoration(
+                      border: Border.fromBorderSide(BorderSide(
+                          color: Theme.of(context).colorScheme.secondary)),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.close,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox.shrink(),
+          ...widget.colors
+              .map(
+                (color) => _ColorHolder(
+                  color: color,
+                  active: color == _activeColor,
+                  onTap: (color) {
+                    setState(() => _activeColor = color);
+                    widget.onColorPicked(color);
+                  },
+                ),
+              )
+              .toList()
+        ],
       ),
     );
   }
@@ -68,7 +93,7 @@ class _ColorHolder extends StatelessWidget {
       decoration: BoxDecoration(
         border: active
             ? Border.fromBorderSide(
-                BorderSide(color: Theme.of(context).colorScheme.onSurface))
+                BorderSide(color: Theme.of(context).colorScheme.onBackground))
             : null,
         borderRadius: BorderRadius.circular(50),
       ),
@@ -80,7 +105,7 @@ class _ColorHolder extends StatelessWidget {
             width: 35,
             decoration: BoxDecoration(
               border: Border.fromBorderSide(
-                  BorderSide(color: Theme.of(context).colorScheme.onSurface)),
+                  BorderSide(color: Theme.of(context).colorScheme.secondary)),
               borderRadius: BorderRadius.circular(50),
               color: color,
             ),

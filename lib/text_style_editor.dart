@@ -197,19 +197,22 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                         widget.onTextStyleEdited!(_textStyle);
                       }
                     },
+                    backgroundColorTool: EditorToolbarAction.fontColorTool,
                   );
                 case EditorToolbarAction.backgroundColorTool:
                   return ColorPalette(
                     activeColor: _textStyle.backgroundColor,
                     colors: _paletteColors,
                     onColorPicked: (color) {
-                      setState(() => _textStyle =
-                          _textStyle.copyWith(backgroundColor: color));
+                      setState(() => _textStyle = _textStyle.copyWith(
+                          backgroundColor: color ?? Colors.transparent));
 
                       if (widget.onTextStyleEdited != null) {
                         widget.onTextStyleEdited!(_textStyle);
                       }
                     },
+                    editorToolbarAction:
+                        EditorToolbarAction.backgroundColorTool,
                   );
                 case EditorToolbarAction.editor:
                   return Container();
